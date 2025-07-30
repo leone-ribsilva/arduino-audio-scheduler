@@ -1,16 +1,16 @@
-# Checklist de Conexão por Componente
+# ✅ Checklist de Conexão por Componente – Atualizado
 
-## 🔌 DFPlayer Mini
+## 🔊 DFPlayer Mini
 
-| DFPlayer Pin  | Conectar a              | Observações                              |
-| ------------- | ----------------------- | ---------------------------------------- |
-| VCC           | 5V do Arduino           | Pode usar 3.3V também, mas 5V é ideal    |
-| GND           | GND do Arduino          | Terra comum                              |
-| TX            | Pino 10 do Arduino      | Comunicação serial (RX Arduino)          |
-| RX            | Pino 11 do Arduino      | Comunicação serial (TX Arduino)          |
-| SPK_1 / SPK_2 | Alto-falante (opcional) | Ou use saída via P2/RCA via amplificador |
+| DFPlayer Pin  | Conectar a          | Observações                                                                 |
+| ------------- | ------------------- | ---------------------------------------------------------------------------- |
+| VCC           | 5V do Arduino       | Pode usar 3.3V também, mas 5V é mais estável                                 |
+| GND           | GND do Arduino      | Terra comum                                                                  |
+| TX            | Pino 7 do Arduino   | Vai para o RX do Arduino via SoftwareSerial (`mySerial`)                    |
+| RX            | Pino 6 do Arduino   | Recebe do TX do Arduino via divisor resistivo recomendado                   |
+| SPK_1 / SPK_2 | Alto-falante (opcional) | Ou use saída via P2/RCA conectando em DAC_L e DAC_R com resistores          |
 
-> 💡 Se for usar saída de áudio via P2/RCA para mesa de som, conecte nos pinos DAC_R e DAC_L do DFPlayer (e GND), ligados a um conector P2 ou RCA com divisor resistivo se necessário.
+> 💡 **Saída para mesa de som**: use os pinos **DAC_L**, **DAC_R** e **GND** conectados a um conector P2 ou RCA. Utilize resistores de 1kΩ para limitar corrente.
 
 ---
 
@@ -18,14 +18,14 @@
 
 | RTC Pin | Conectar a        | Observações                 |
 | ------- | ----------------- | --------------------------- |
-| VCC     | 5V do Arduino     | Ou 3.3V se for um módulo 3V |
+| VCC     | 5V do Arduino     | Pode usar 3.3V em alguns módulos |
 | GND     | GND do Arduino    | Terra comum                 |
 | SDA     | A4 no Arduino Uno | Comunicação I2C (dados)     |
 | SCL     | A5 no Arduino Uno | Comunicação I2C (clock)     |
 
 ---
 
-## 💾 Cartão microSD (caso separado do DFPlayer)
+## 💾 Módulo de Cartão microSD (separado do DFPlayer)
 
 | SD Pin | Conectar a         | Observações                               |
 | ------ | ------------------ | ----------------------------------------- |
@@ -38,9 +38,11 @@
 
 ---
 
-## 🔧 Conexão com Resistência (se necessário)
+## 🔧 Conexões com Resistores (se necessário)
 
--   Entre DFPlayer RX e pino 11 do Arduino: usar divisor resistivo (ex: 1k + 2k resistores) para evitar sobrecarga no pino do DFPlayer (pois ele opera a 3.3V e o Arduino a 5V).
--   Se for ligar em amplificador externo ou entrada de mesa via P2/RCA, pode usar resistores de 1kΩ para cada saída L/R, somando com GND no jack.
+- Entre **DFPlayer RX** e **pino 6 do Arduino**: usar divisor resistivo (ex: 1kΩ + 2kΩ) para adaptar nível lógico de 5V para 3.3V.
+- Para saída de áudio via **P2/RCA** para mesa de som: usar resistores de 1kΩ em série com DAC_L e DAC_R.
+
+---
 
 ![Diagrama de ligação](diagrama_ligacao.png)
